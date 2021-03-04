@@ -32,10 +32,9 @@ task :import, [:invoices] => :environment do
     end
     Invoice.create!({ id:          row[0],
                       customer_id: row[1],
-                      merchant_id: row[2],
                       status:      status,
-                      created_at:  row[4],
-                      updated_at:  row[5] })
+                      created_at:  row[3],
+                      updated_at:  row[4] })
   end
   ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
 end
