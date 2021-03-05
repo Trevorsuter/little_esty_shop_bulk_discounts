@@ -65,6 +65,7 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
   describe 'each bulk discount' do
 
     it 'shows its percentage' do
+
       within("#discount-#{@discount1.id}") do
         expect(page).to have_content(@discount1.percentage)
       end
@@ -77,10 +78,50 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
       within("#discount-#{@discount4.id}") do
         expect(page).to have_content(@discount4.percentage)
       end
-      
     end
-    it 'shows its quantity threshold'
-    it 'shows its description'
-    it 'has a link to its show page'
+    it 'shows its quantity threshold' do
+
+      within("#discount-#{@discount1.id}") do
+        expect(page).to have_content(@discount1.threshold)
+      end
+      within("#discount-#{@discount2.id}") do
+        expect(page).to have_content(@discount2.threshold)
+      end
+      within("#discount-#{@discount3.id}") do
+        expect(page).to have_content(@discount3.threshold)
+      end
+      within("#discount-#{@discount4.id}") do
+        expect(page).to have_content(@discount4.threshold)
+      end
+    end
+    it 'shows its description' do
+
+      within("#discount-#{@discount1.id}") do
+        expect(page).to have_content(@discount1.description)
+      end
+      within("#discount-#{@discount2.id}") do
+        expect(page).to have_content(@discount2.description)
+      end
+      within("#discount-#{@discount3.id}") do
+        expect(page).to have_content(@discount3.description)
+      end
+      within("#discount-#{@discount4.id}") do
+        expect(page).to have_content(@discount4.description)
+      end
+    end
+    it 'has a link to its show page' do
+      within("#discount-#{@discount1.id}") do
+        expect(page).to have_link("#{@discount1.id}", href: merchant_bulk_discount_path(@merchant1.id, @discount1.id))
+      end
+      within("#discount-#{@discount2.id}") do
+        expect(page).to have_link("#{@discount2.id}", href: merchant_bulk_discount_path(@merchant1.id, @discount2.id))
+      end
+      within("#discount-#{@discount3.id}") do
+        expect(page).to have_link("#{@discount3.id}", href: merchant_bulk_discount_path(@merchant1.id, @discount3.id))
+      end
+      within("#discount-#{@discount4.id}") do
+        expect(page).to have_link("#{@discount4.id}", href: merchant_bulk_discount_path(@merchant1.id, @discount4.id))
+      end  
+    end
   end
 end

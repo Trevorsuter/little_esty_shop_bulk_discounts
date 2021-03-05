@@ -4,8 +4,9 @@
     <ul class="mr-auto col-sm-4" id="discounts">
       <% @discounts.each do |d| %>
         <div id="discount-<%= d.id %>">
-        <ul>Discount <%= d.id %>
-        - Percentage: <%= d.percentage %>%</ul>
+        <ul>Discount <a href="/merchant/<%= @merchant.id %>/bulk_discounts/<%= d.id %>"><%= d.id %></a>
+        - Description: <%= d.description %>
+        - Discount: <%= d.percentage %>% off of each item for orders over <%= d.threshold %> items</ul>
         </div>
       <% end %>
     </ul>
