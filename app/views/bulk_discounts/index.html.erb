@@ -1,0 +1,14 @@
+<body>
+  <div class="row">
+    <p class="ml-auto col-sm-5">Bulk discounts:</p>
+    <ul class="mr-auto col-sm-4" id="discounts">
+      <% @discounts.each do |discount| %>
+        <div id="discount-<%= discount.id %>">
+        <ul>Discount <%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant, discount) %>
+        - Description: <%= discount.description %>
+        - Discount: <%= discount.percentage %>% off of each item for orders over <%= discount.threshold %> items</ul>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+</body>
