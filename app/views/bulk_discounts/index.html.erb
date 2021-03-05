@@ -2,11 +2,11 @@
   <div class="row">
     <p class="ml-auto col-sm-5">Bulk discounts:</p>
     <ul class="mr-auto col-sm-4" id="discounts">
-      <% @discounts.each do |d| %>
-        <div id="discount-<%= d.id %>">
-        <ul>Discount <a href="/merchant/<%= @merchant.id %>/bulk_discounts/<%= d.id %>"><%= d.id %></a>
-        - Description: <%= d.description %>
-        - Discount: <%= d.percentage %>% off of each item for orders over <%= d.threshold %> items</ul>
+      <% @discounts.each do |discount| %>
+        <div id="discount-<%= discount.id %>">
+        <ul>Discount <%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant, discount) %>
+        - Description: <%= discount.description %>
+        - Discount: <%= discount.percentage %>% off of each item for orders over <%= discount.threshold %> items</ul>
         </div>
       <% end %>
     </ul>
