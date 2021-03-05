@@ -62,6 +62,14 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
     expect(page).to_not have_content(@discount5.id)
   end
 
+  it 'has the name and date of the next 3 upcoming us holidays' do
+
+    within("#holiday-header") do
+      expect(page).to have_content("Upcoming Holidays")
+    end
+
+  end
+
   describe 'each bulk discount' do
 
     it 'shows its percentage' do

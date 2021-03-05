@@ -1,6 +1,7 @@
 <body>
   <div class="row">
-    <p class="ml-auto col-sm-5">Bulk discounts:</p>
+    <p class="ml-auto col-sm-5" id= "bd-header">Bulk discounts:</p>
+    <p class="mr-auto col-sm-5" id= "holiday-header">Upcoming Holidays:</p>
     <ul class="mr-auto col-sm-4" id="discounts">
       <% @discounts.each do |discount| %>
         <div id="discount-<%= discount.id %>">
