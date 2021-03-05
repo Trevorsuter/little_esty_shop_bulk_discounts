@@ -48,12 +48,14 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
   end
 
   it 'shows all of the merchants bulk discounts' do
+
     within('#discounts') do
       expect(page).to have_content(@discount1.id)
       expect(page).to have_content(@discount2.id)
       expect(page).to have_content(@discount3.id)
       expect(page).to have_content(@discount4.id)
     end
+
   end
 
   it 'does not show bulk discounts from other merchants' do
@@ -61,7 +63,22 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
   end
 
   describe 'each bulk discount' do
-    it 'shows its percentage discount'
+
+    it 'shows its percentage' do
+      within("#discount-#{@discount1.id}") do
+        expect(page).to have_content(@discount1.percentage)
+      end
+      within("#discount-#{@discount2.id}") do
+        expect(page).to have_content(@discount2.percentage)
+      end
+      within("#discount-#{@discount3.id}") do
+        expect(page).to have_content(@discount3.percentage)
+      end
+      within("#discount-#{@discount4.id}") do
+        expect(page).to have_content(@discount4.percentage)
+      end
+      
+    end
     it 'shows its quantity threshold'
     it 'shows its description'
     it 'has a link to its show page'

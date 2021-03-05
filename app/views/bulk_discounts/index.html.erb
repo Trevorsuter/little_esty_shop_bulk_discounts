@@ -3,7 +3,10 @@
     <p class="ml-auto col-sm-5">Bulk discounts:</p>
     <ul class="mr-auto col-sm-4" id="discounts">
       <% @discounts.each do |d| %>
-        <ul class="discount-<%= d.id %>">Discount <%= d.id %></ul>
+        <div id="discount-<%= d.id %>">
+        <ul>Discount <%= d.id %>
+        - Percentage: <%= d.percentage %>%</ul>
+        </div>
       <% end %>
     </ul>
   </div>
