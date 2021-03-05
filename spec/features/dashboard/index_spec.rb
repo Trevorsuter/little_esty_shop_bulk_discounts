@@ -60,6 +60,14 @@ RSpec.describe 'merchant dashboard' do
     expect(current_path).to eq("/merchant/#{@merchant1.id}/invoices")
   end
 
+  it 'can see a link to my merchant discounts index' do
+    expect(page).to have_link("Bulk Discounts")
+
+    click_link "Bulk Discounts"
+
+    expect(current_path).to eq("/merchant/#{@merchant1}/bulk_discounts")
+  end
+
   it "can see a section for Items Ready to Ship with list of names of items ordered and ids" do
     within("#items_ready_to_ship") do
 
@@ -75,9 +83,9 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it "each invoice id is a link to my merchant's invoice show page " do
-    expect(page).to have_link(@item_1.invoice_ids)
-    expect(page).to have_link(@item_2.invoice_ids)
-    expect(page).to_not have_link(@item_3.invoice_ids)
+    expect(page).to have_link("#{@item_1.invoice_ids}")
+    expect(page).to have_link("#{@item_2.invoice_ids}")
+    expect(page).to_not have_link("#{@item_3.invoice_ids}")
 
     click_link("#{@item_1.invoice_ids}", match: :first)
     expect(current_path).to eq("/merchant/#{@merchant1.id}/invoices/#{@invoice_1.id}")
