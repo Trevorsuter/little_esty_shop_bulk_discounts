@@ -15,8 +15,8 @@ RSpec.describe BulkDiscount, type: :model do
       @discount = @merchant.bulk_discounts.create(percentage: 20, threshold: 10)
     end
     it 'changes the full integer to a decimal' do
-      expect(@discount.percentage).to_not eq(20)
-      expect(@discount.percentage).to eq(0.2)
+      expect(@discount.percentage.to_f).to_not eq(20.0)
+      expect(@discount.percentage.to_f).to eq(0.2)
     end
   end
 end
