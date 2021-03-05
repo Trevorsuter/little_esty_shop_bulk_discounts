@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'merchant bulk discounts index', type: :feature do
   before :each do
     @merchant1 = Merchant.create!(name: 'Hair Care')
+    @merchant2 = Merchant.create!(name: 'Nail Care')
 
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
     @customer_2 = Customer.create!(first_name: 'Cecilia', last_name: 'Jones')
@@ -37,20 +38,32 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
     @transaction6 = Transaction.create!(credit_card_number: 879799, result: 1, invoice_id: @invoice_7.id)
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
-    @discount1 = @merchant1.bulk_discounts.create!(percentage: 20, threshold: 10)
-    @discount2 = @merchant1.bulk_discounts.create!(percentage: 15, threshold: 5)
-    @discount3 = @merchant1.bulk_discounts.create!(percentage: 30, threshold: 20)
-    @discount4 = @merchant1.bulk_discounts.create!(percentage: 25, threshold: 15)
+    @discount1 = @merchant1.bulk_discounts.create!(percentage: 20, threshold: 10, description: "discount 1")
+    @discount2 = @merchant1.bulk_discounts.create!(percentage: 15, threshold: 5, description: "discount 2")
+    @discount3 = @merchant1.bulk_discounts.create!(percentage: 30, threshold: 20, description: "discount 3")
+    @discount4 = @merchant1.bulk_discounts.create!(percentage: 25, threshold: 15, description: "discount 4")
+    @discount5 = @merchant2.bulk_discounts.create!(percentage: 25, threshold: 15, description: "discount 5")
 
     visit merchant_bulk_discounts_path(@merchant1)
   end
 
-  it 'shows all of the bulk discounts' do
-
+  it 'shows all of the merchants bulk discounts' do
+    within('#discounts') do
+      expect(page).to have_content(@discount1.id)
+      expect(page).to have_content(@discount2.id)
+      expect(page).to have_content(@discount3.id)
+      expect(page).to have_content(@discount4.id)
+    end
   end
+
+  it 'does not show bulk discounts from other merchants' do
+    expect(page).to_not have_content(@discount5.id)
+  end
+
   describe 'each bulk discount' do
-    it 'each bulk discount shows their percentage discount'
-    it 'each bulk discount shows their quantity threshold'
+    it 'shows its percentage discount'
+    it 'shows its quantity threshold'
+    it 'shows its description'
     it 'has a link to its show page'
   end
 end

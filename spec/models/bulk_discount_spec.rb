@@ -7,12 +7,13 @@ RSpec.describe BulkDiscount, type: :model do
   describe 'validations' do
     it {should validate_presence_of :percentage}
     it {should validate_presence_of :threshold}
+    it {should validate_presence_of :description}
   end
 
   describe 'before save' do
     before :each do
       @merchant = Merchant.create(name: "Trevor Suter")
-      @discount = @merchant.bulk_discounts.create(percentage: 20, threshold: 10)
+      @discount = @merchant.bulk_discounts.create(percentage: 20, threshold: 10, description: "discount")
     end
     it 'changes the full integer to a decimal' do
       expect(@discount.percentage.to_f).to_not eq(20.0)

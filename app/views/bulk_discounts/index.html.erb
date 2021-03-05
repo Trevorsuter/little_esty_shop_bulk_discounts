@@ -1,0 +1,10 @@
+<body>
+  <div class="row">
+    <p class="ml-auto col-sm-5">Bulk discounts:</p>
+    <ul class="mr-auto col-sm-4" id="discounts">
+      <% @discounts.each do |d| %>
+        <ul class="discount-<%= d.id %>">Discount <%= d.id %></ul>
+      <% end %>
+    </ul>
+  </div>
+</body>
