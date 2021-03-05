@@ -31,10 +31,5 @@ coverage/.
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-<<<<<<< HEAD
-notes.md
-user-stories.md
-=======
 user-stories.md
 notes.md
->>>>>>> 716e17a39bf42dbcb55ec0db1b4e20d47e45cd1f
