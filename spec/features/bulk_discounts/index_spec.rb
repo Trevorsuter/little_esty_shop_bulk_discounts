@@ -45,8 +45,9 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
     visit merchant_bulk_discounts_path(@merchant1)
   end
 
-  it 'shows all of the bulk discounts'
+  it 'shows all of the bulk discounts' do
 
+  end
   describe 'each bulk discount' do
     it 'each bulk discount shows their percentage discount'
     it 'each bulk discount shows their quantity threshold'
