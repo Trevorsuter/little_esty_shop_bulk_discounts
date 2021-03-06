@@ -1,13 +1,7 @@
 class DateService
 
-  def get_dates
-    get_url("https://date.nager.at/Api/v2/NextPublicHolidays/US?limit=3")
-  end
-
-  def closest_holidays
-    get_dates[0..2].map do |data|
-      Holiday.new(data)
-    end
+  def get_holidays
+    get_url("https://date.nager.at/Api/v2/NextPublicHolidays/US")
   end
 
   def get_url(url)

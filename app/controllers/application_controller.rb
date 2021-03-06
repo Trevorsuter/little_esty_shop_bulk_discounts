@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  
-  @date = DateService.new
+
+  def three_closest_holidays
+    @three_closest_holidays = HolidaySearch.new.holidays[0..2]
+  end
   
 end
