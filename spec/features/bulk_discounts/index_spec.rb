@@ -63,9 +63,26 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
   end
 
   it 'has the name and date of the next 3 upcoming us holidays' do
+    holidays = HolidaySearch.new.holidays
+    holiday1 = holidays[0]
+    holiday2 = holidays[1]
+    holiday3 = holidays[2]
 
     within("#holiday-header") do
       expect(page).to have_content("Upcoming Holidays")
+    end
+
+    within("##{holiday1.date}") do
+      expect(page).to have_content(holiday1.name)
+      expect(page).to have_content(holiday1.date)
+    end
+    within("##{holiday2.date}") do
+      expect(page).to have_content(holiday2.name)
+      expect(page).to have_content(holiday2.date)
+    end
+    within("##{holiday3.date}") do
+      expect(page).to have_content(holiday3.name)
+      expect(page).to have_content(holiday3.date)
     end
 
   end
