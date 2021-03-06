@@ -2,7 +2,7 @@
   <div class="row">
     <p class="ml-auto col-sm-5" id= "bd-header">Bulk discounts:</p>
     <p class="mr-auto col-sm-5" id= "holiday-header">Upcoming Holidays:</p>
-    <ul class="mr-auto col-sm-4" id="discounts">
+    <ul class="ml-auto col-sm-4" id="discounts">
       <% @discounts.each do |discount| %>
         <div id="discount-<%= discount.id %>">
         <ul>Discount <%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant, discount) %>
@@ -11,5 +11,13 @@
         </div>
       <% end %>
     </ul>
+    <% @three_closest_holidays.each do |holiday| %>
+      <div id="<%= holiday.date %>">
+        <ul class="mr-auto-col-sm-4">
+          - <%= holiday.name %>, <%= holiday.date %>
+        </ul>
+      </div>
+      <% end %>
+
   </div>
 </body>
