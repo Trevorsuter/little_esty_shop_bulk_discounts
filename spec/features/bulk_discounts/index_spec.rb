@@ -87,6 +87,15 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
 
   end
 
+  it 'has a link to create a new bulk discount' do
+
+    expect(page).to have_link("Create")
+
+    click_link "Create"
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
+
+  end
+
   describe 'each bulk discount' do
 
     it 'shows its percentage' do
