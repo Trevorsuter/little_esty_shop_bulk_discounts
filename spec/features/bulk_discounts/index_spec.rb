@@ -164,5 +164,43 @@ RSpec.describe 'merchant bulk discounts index', type: :feature do
       
       expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/#{@discount1.id}")
     end
+
+    it 'has a button to delete that merchant' do
+
+      within("#discount-#{@discount1.id}") do
+        expect(page).to have_button('delete')
+      end
+      within("#discount-#{@discount2.id}") do
+        expect(page).to have_button('delete')
+      end
+      within("#discount-#{@discount3.id}") do
+        expect(page).to have_button('delete')
+      end
+      within("#discount-#{@discount4.id}") do
+        expect(page).to have_button('delete')
+      end
+
+    end
+
+    it 'can be destroyed' do
+
+      within("#discount-#{@discount1.id}") do
+        click_button 'delete'
+      end
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+      
+      within ("#discounts") do
+        expect(page).to_not have_css("#discount-#{@discount1.id}")
+        expect(page).to_not have_content("Discount #{@discount1.id}")
+
+        expect(page).to have_css("#discount-#{@discount2.id}")
+        expect(page).to have_content("Discount #{@discount2.id}")
+        expect(page).to have_css("#discount-#{@discount3.id}")
+        expect(page).to have_content("Discount #{@discount3.id}")
+        expect(page).to have_css("#discount-#{@discount4.id}")
+        expect(page).to have_content("Discount #{@discount4.id}")
+      end
+    end
   end
 end
