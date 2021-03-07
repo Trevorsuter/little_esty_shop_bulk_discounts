@@ -15,16 +15,17 @@ class BulkDiscountsController < ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    bulk_discount = @merchant.bulk_discounts.new(
-                                description: params[:description],
-                                percentage: params[:percentage],
-                                threshold: params[:threshold]
-                                )
+    bulk_discount = @merchant.bulk_discounts.new(bulk_discount_params)
     if bulk_discount.save
       redirect_to merchant_bulk_discounts_path(@merchant)
     else
       flash[:notice] = "Bulk Discount not created: Required information missing."
       render :new
     end
+  end
+
+  private
+  def bulk_discount_params
+    params.permit(:description, :percentage, :threshold)
   end
 end
