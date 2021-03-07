@@ -1,23 +1,30 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <p class="navbar-text"><%= @merchant.name %></p>
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Create', new_merchant_bulk_discount_path, class: 'link_1', style: 'pull-right' %>
+    </ul>
+  </nav>
+</div>
 <body>
   <div class="row">
     <p class="ml-auto col-sm-5" id= "bd-header">Bulk discounts:</p>
     <p class="mr-auto col-sm-5" id= "holiday-header">Upcoming Holidays:</p>
+  </div>
     <ul class="ml-auto col-sm-4" id="discounts">
       <% @discounts.each do |discount| %>
-        <div id="discount-<%= discount.id %>">
+        <section id="discount-<%= discount.id %>">
         <ul>Discount <%= link_to "#{discount.id}", merchant_bulk_discount_path(@merchant, discount) %>
         - Description: <%= discount.description %>
         - Discount: <%= discount.percentage %>% off of each item for orders over <%= discount.threshold %> items</ul>
-        </div>
+        </section>
       <% end %>
     </ul>
-    <% @three_closest_holidays.each do |holiday| %>
-      <div id="<%= holiday.date %>">
-        <ul class="mr-auto-col-sm-4">
-          - <%= holiday.name %>, <%= holiday.date %>
-        </ul>
-      </div>
+    <ul class="mr-auto-col-sm-4" style="float:right; padding-right: 400px;">
+      <% @three_closest_holidays.each do |holiday| %>
+        <section id="<%= holiday.date %>">
+          <li><%= holiday.name %>, <%= holiday.date %></li><br>
+        </section>
       <% end %>
-
-  </div>
+    </ul>
 </body>
