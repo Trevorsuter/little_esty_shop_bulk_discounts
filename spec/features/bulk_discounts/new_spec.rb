@@ -34,10 +34,48 @@ RSpec.describe 'Bulk Discounts New Page', type: :feature do
     expect(page).to have_content('bulk discount 1 created!')
     expect(page).to have_content('20')
     expect(page).to have_content('15')
-    
+
   end
 
-  it 'cannot create a new bulk discount without filling in all the forms'
+  it 'description must be filled in to create the bulk discount' do
 
-  it 'cannot create a new bulk discount if a field has an incorrect data type'
+    fill_in 'percentage', with: '20'
+    fill_in 'threshold', with: '10'
+    click_button 'create'
+
+    expect(page).to have_content('Bulk Discount not created: Required information missing.')
+    expect(page).to have_field('description')
+    expect(page).to have_field('percentage')
+    expect(page).to have_field('threshold')
+    expect(page).to have_button('create')
+
+  end
+
+  it 'percentage must be filled in to create the bulk discount' do
+
+    fill_in 'description', with: 'Cant Create'
+    fill_in 'threshold', with: '10'
+    click_button 'create'
+
+    expect(page).to have_content('Bulk Discount not created: Required information missing.')
+    expect(page).to have_field('description')
+    expect(page).to have_field('percentage')
+    expect(page).to have_field('threshold')
+    expect(page).to have_button('create')
+
+  end
+
+  it 'threshold must be filled in to create the bulk discount' do
+
+    fill_in 'percentage', with: '20'
+    fill_in 'description', with: 'Cannot Create'
+    click_button 'create'
+
+    expect(page).to have_content('Bulk Discount not created: Required information missing.')
+    expect(page).to have_field('description')
+    expect(page).to have_field('percentage')
+    expect(page).to have_field('threshold')
+    expect(page).to have_button('create')
+  end
+
 end
