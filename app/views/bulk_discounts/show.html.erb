@@ -2,7 +2,10 @@
   <div class="row">
     <p class="col-12">Discount <%= @discount.id %></p>
   </div>
-  <p style="text-align: center;">Description: <%= @discount.description %></p><br>
-  <p style="text-align: center;">Percentage: <%= @discount.percentage %></p><br>
-  <p style="text-align: center;">Threshold: <%= @discount.threshold %></p>
+  <div style="text-align: center;">
+    <p>Description: <%= @discount.description %></p><br>
+    <p>Percentage: <%= @discount.percentage %></p><br>
+    <p>Threshold: <%= @discount.threshold %></p><br>
+    <%= link_to 'update', edit_merchant_bulk_discount_path %>
+  </div>
 </body>

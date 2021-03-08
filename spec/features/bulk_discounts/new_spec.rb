@@ -17,7 +17,7 @@ RSpec.describe 'Bulk Discounts New Page', type: :feature do
 
   it 'has a create button' do
 
-    expect(page).to have_button('create')
+    expect(page).to have_button('submit')
 
   end
 
@@ -27,7 +27,7 @@ RSpec.describe 'Bulk Discounts New Page', type: :feature do
     fill_in 'percentage', with: '20'
     fill_in 'threshold', with: '15'
 
-    click_button 'create'
+    click_button 'submit'
 
     expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
 
@@ -41,13 +41,13 @@ RSpec.describe 'Bulk Discounts New Page', type: :feature do
 
     fill_in 'percentage', with: '20'
     fill_in 'threshold', with: '10'
-    click_button 'create'
+    click_button 'submit'
 
     expect(page).to have_content('Bulk Discount not created: Required information missing.')
     expect(page).to have_field('description')
     expect(page).to have_field('percentage')
     expect(page).to have_field('threshold')
-    expect(page).to have_button('create')
+    expect(page).to have_button('submit')
 
   end
 
@@ -55,13 +55,13 @@ RSpec.describe 'Bulk Discounts New Page', type: :feature do
 
     fill_in 'description', with: 'Cant Create'
     fill_in 'threshold', with: '10'
-    click_button 'create'
+    click_button 'submit'
 
     expect(page).to have_content('Bulk Discount not created: Required information missing.')
     expect(page).to have_field('description')
     expect(page).to have_field('percentage')
     expect(page).to have_field('threshold')
-    expect(page).to have_button('create')
+    expect(page).to have_button('submit')
 
   end
 
@@ -69,13 +69,13 @@ RSpec.describe 'Bulk Discounts New Page', type: :feature do
 
     fill_in 'percentage', with: '20'
     fill_in 'description', with: 'Cannot Create'
-    click_button 'create'
+    click_button 'submit'
 
     expect(page).to have_content('Bulk Discount not created: Required information missing.')
     expect(page).to have_field('description')
     expect(page).to have_field('percentage')
     expect(page).to have_field('threshold')
-    expect(page).to have_button('create')
+    expect(page).to have_button('submit')
   end
 
 end
