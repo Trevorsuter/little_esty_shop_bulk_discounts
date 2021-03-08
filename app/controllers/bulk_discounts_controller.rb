@@ -25,6 +25,8 @@ class BulkDiscountsController < ApplicationController
   end
 
   def edit
+    @discount = BulkDiscount.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
   def destroy
