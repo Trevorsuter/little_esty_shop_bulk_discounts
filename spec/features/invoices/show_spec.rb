@@ -41,7 +41,7 @@ RSpec.describe 'invoices show' do
     @ii_8 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_8.id, quantity: 1, unit_price: 5, status: 1)
     @ii_9 = InvoiceItem.create!(invoice_id: @invoice_7.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1)
     @ii_10 = InvoiceItem.create!(invoice_id: @invoice_8.id, item_id: @item_5.id, quantity: 1, unit_price: 1, status: 1)
-    @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 12, unit_price: 6, status: 1)
+    @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 6, status: 1)
 
     @transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_1.id)
     @transaction2 = Transaction.create!(credit_card_number: 230948, result: 1, invoice_id: @invoice_2.id)
@@ -94,12 +94,25 @@ RSpec.describe 'invoices show' do
 
   it "shows a select field to update the invoice status" do
 
-    within("#the-status-#{@ii_1.id}") do
+    within("#ii-#{@ii_1.id}") do
       page.select("cancelled")
       click_button "Update Invoice"
       expect(page).to have_content("cancelled")
       expect(page).to_not have_content("in progress")
      end
+  end
+
+  it 'shows the discount applied to an item with a link to the discounts show page' do
+
+    within ("#ii-#{@ii_1.id}") do
+      expect(page).to have_link("Discount #{@discount3.id}")
+    end
+
+    within("#ii-#{@ii_11.id}") do
+      expect(page).to_not have_content("Discount #{@discount1.id}")
+      expect(page).to_not have_content("Discount #{@discount2.id}")
+      expect(page).to_not have_content("Discount #{@discount3.id}")
+    end
   end
 
 end
