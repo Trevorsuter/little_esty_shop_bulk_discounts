@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Bulk discount Edit Page', type: :feature do
   before :each do
     @merchant1 = Merchant.create!(name: 'Hair Care')
-    @discount1 = @merchant1.bulk_discounts.create!(percentage: 20, threshold: 10, description: "discount 1")
-    @discount2 = @merchant1.bulk_discounts.create!(percentage: 15, threshold: 15, description: "discount 2")
+    @discount1 = @merchant1.bulk_discounts.create!(id: 1, percentage: 20, threshold: 10, description: "discount 1")
+    @discount2 = @merchant1.bulk_discounts.create!(id: 2, percentage: 15, threshold: 15, description: "discount 2")
 
     visit edit_merchant_bulk_discount_path(@merchant1, @discount1)
   end
@@ -38,7 +38,6 @@ RSpec.describe 'Bulk discount Edit Page', type: :feature do
     expect(page).to have_content('Update Complete!')
     expect(page).to have_content('50')
     expect(page).to have_content('75')
-
     expect(page).to_not have_content('discount 1')
     expect(page).to_not have_content('20')
     expect(page).to_not have_content('10')

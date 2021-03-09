@@ -18,7 +18,7 @@ RSpec.describe 'Bulk Discount Show Page', type: :feature do
   end
 
   it 'does not show attributes of other records' do
-
+    save_and_open_page
     expect(page).to_not have_content(@discount2.description)
     expect(page).to_not have_content(@discount2.percentage)
     expect(page).to_not have_content(@discount2.threshold)

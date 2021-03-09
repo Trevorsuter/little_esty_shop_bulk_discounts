@@ -52,9 +52,9 @@ RSpec.describe Invoice, type: :model do
       @discount2 = @merchant1.bulk_discounts.create!(description: "bulk discount 2", percentage: 20, threshold: 10)
       @discount3 = @merchant1.bulk_discounts.create!(description: "bulk discount 3", percentage: 10, threshold: 5)
     end
-    it "total_revenue" do
+    it "gross_revenue" do
 
-      expect(@invoice_1.total_revenue).to eq(100)
+      expect(@invoice_1.gross_revenue).to eq(100)
     end
 
     it 'can find the total revenue with discounts applied' do
@@ -77,20 +77,20 @@ RSpec.describe Invoice, type: :model do
       expect(@invoice_4.invoice_items_with_discounts).to eq([])
     end
 
-    it 'can find the total amount of discount' do
+    it 'can find the total revenue after discounts are applied' do
       
-      expected_1 = @invoice_1.total_revenue - @invoice_1.total_discount 
-      expected_2 = @invoice_2.total_revenue - @invoice_2.total_discount 
-      expected_3 = @invoice_3.total_revenue - @invoice_3.total_discount 
-      expected_4 = @invoice_4.total_revenue 
+      expected_1 = @invoice_1.gross_revenue - @invoice_1.total_discount 
+      expected_2 = @invoice_2.gross_revenue - @invoice_2.total_discount 
+      expected_3 = @invoice_3.gross_revenue - @invoice_3.total_discount 
+      expected_4 = @invoice_4.gross_revenue 
 
-      expect(@invoice_1.total_discounted_revenue).to eq(expected_1)
-      expect(@invoice_2.total_discounted_revenue).to eq(expected_2)
-      expect(@invoice_3.total_discounted_revenue).to eq(expected_3)
-      expect(@invoice_4.total_discounted_revenue).to eq (expected_4)
+      expect(@invoice_1.total_revenue).to eq(expected_1)
+      expect(@invoice_2.total_revenue).to eq(expected_2)
+      expect(@invoice_3.total_revenue).to eq(expected_3)
+      expect(@invoice_4.total_revenue).to eq (expected_4)
     end
 
-    it 'can find the discount applied for each invoice_item' do
+    it 'can find the id of the discount applied for each invoice_item' do
 
       expect(@invoice_1.discount_for_invoice_item(@ii_1.id)).to eq(@discount3.id)
       expect(@invoice_1.discount_for_invoice_item(@ii_2.id)).to be_nil
